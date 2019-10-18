@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Wedding Planner</h1>
+
+</div>
+
+<a class = "float-right btn btn-primary"asp-controller="home" asp-action="logout" >
+         Logout
+        </a>
+        <h1>@ViewBag.UID</h1>
+<br>
+<table class="table">
+
+  <thead>
+    <tr>
+        <th scope="col"> Wedding</th>
+        <th scope="col"> Date</th>
+        <th scope="col"> Address</th>
+        <th scope="col"> # of Guests</th>
+        <th scope="col"> Action</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var ThisWedding in @ViewBag.allTheWeddings)
+      {
+    <tr>
+        
+      <td>   <a asp-controller="Home" asp-action="WeddingDetail" asp-route-id="@ThisWedding.WeddingId"  >
+        @ThisWedding.Wedder1 & @ThisWedding.Wedder2 </a></td>
+        <td>@ThisWedding.WeddingDate </td>
+        <td>@ThisWedding.Address</td>
+        <td>@ThisWedding.Creator.UserId </td>
+        <td>
+            @{int Guestidnum=0;}
+
+            @if(ThisWedding.Creator.UserId  ==  @ViewBag.UID){
+                <a asp-controller="Home" asp-action="DeleteWedding" asp-route-id="@ThisWedding.WeddingId">Delete </a> 
+            }
+            else
+            {
+                bool isGuestInList = false;
+                foreach( var i in ThisWedding.Attendees )
+                {
+                    if(i.UserId == @ViewBag.UID)
+                    {
+                        isGuestInList = true;
+                        Guestidnum = i.GuestId;
+                        break;
+                        
+                    }
+                }
+                if(isGuestInList == false)
+                {
+                    <a asp-controller="Home" asp-action="RSVP" asp-route-id="@ThisWedding.WeddingId">RSVP </a> 
+                }
+                else
+                {
+                <a asp-controller="Home" asp-action="UNRSVP" asp-route-id="@Guestidnum">UN-RSVP </a> 
+                }
+            }
+            
+        </td>
+
+    </tr>
+      }
+    <!-- asp-route-id="x.CategoryId" ThisWedding.Attendees.Count-->
+
+  </tbody>
+</table>
+
+<a class = "float-right btn btn-primary"asp-controller="home" asp-action="AddNewWedding" >
+         Add a New Wedding!
+        </a>

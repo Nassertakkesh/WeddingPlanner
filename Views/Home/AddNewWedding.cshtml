@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+        @model Wedding
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Wedding Planner</h1>
+
+</div>
+
+<a class = "float-right btn btn-primary"asp-controller="home" asp-action="logout" >
+         Logout
+        </a>
+
+<br>
+<h3 class="text-center">Plan Your Wedding</h3>
+<hr>
+
+<form asp-action="AddingWedding" asp-controller="Home">
+          <div>
+  <div class="form-group">
+    <label asp-for="Wedder1"></label>
+    <span class="text-danger font-weight-bold" asp-validation-for="Wedder1"></span>
+    <input class="form-control" asp-for="Wedder1">
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Wedder2"></label>
+    <span class="text-danger font-weight-bold" asp-validation-for="Wedder2"></span>
+    <input class="form-control" asp-for="Wedder2">
+  </div>
+
+  <div class="form-group">
+    <label asp-for="WeddingDate"></label>
+    <span class="text-danger font-weight-bold" asp-validation-for="WeddingDate"></span>
+    <input class="form-control" asp-for="WeddingDate" type="Date">
+  </div>
+
+
+  <div class="form-group">
+    <label asp-for="Address"></label>
+    <span class="text-danger font-weight-bold" asp-validation-for="Address"></span>
+    <input class="form-control" asp-for="Address">
+  </div>
+      <!-- <input type="hidden" class="form-control" asp-for="Creator" value="@ViewBag.Uid">  -->
+
+
+
+  <button class="btn btn-info" type="submit">Lets Get ITTTTT</button>
+</div>
+</form>

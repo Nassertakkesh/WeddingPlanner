@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+        @model Wedding
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Wedding Planner</h1>
+
+</div>
+
+<a class = "float-right btn btn-primary"asp-controller="home" asp-action="logout" >
+         Logout
+        </a>
+
+<br>
+<h3 class="text-center">@ViewBag.WeddingDetailsPageInfo.Wedder1 and @ViewBag.WeddingDetailsPageInfo.Wedder2 </h3>
+<hr>
+
+<h4>Date:@ViewBag.WeddingDetailsPageInfo.WeddingDate</h4>
+
+<h4>Address: @ViewBag.WeddingDetailsPageInfo.Address</h4>
+
+<ul> Guests:
+    @foreach(var GuestsAtParty in ViewBag.WeddingDetailsPageInfo.Attendees)
+    {
+    <li>@GuestsAtParty.Attendees.FirstName</li>
+    }
+</ul>
+
